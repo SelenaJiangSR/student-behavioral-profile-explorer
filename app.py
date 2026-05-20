@@ -205,6 +205,8 @@ st.divider()
 # -----------------------------
 # Output
 # -----------------------------
+submit = st.button("Analyze My Behavioral Profile", use_container_width=True)
+if submit:
 st.header("2. Your Estimated Behavioral Profile")
 
 st.markdown(f"""
@@ -267,6 +269,9 @@ summary_data = {
 st.dataframe(pd.DataFrame(summary_data), use_container_width=True)
 
 st.divider()
+else:
+
+    st.info("Adjust the sliders above, then click **Analyze My Behavioral Profile** to see your result.")
 
 # -----------------------------
 # Research note
