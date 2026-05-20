@@ -197,7 +197,7 @@ In the dataset, many students fell into moderate clusters where study behavior, 
         "strengths": ["Moderate lifestyle balance", "No extreme risk indicators", "Flexible behavioral pattern"],
         "risks": ["Academic performance may depend on consistency over time"]
     }
-
+submit = st.button("Analyze My Behavioral Profile", use_container_width=True)
 profile = get_profile(studytime, goout, freetime, dalc, walc, absences, failures)
 
 st.divider()
@@ -205,46 +205,45 @@ st.divider()
 # -----------------------------
 # Output
 # -----------------------------
-submit = st.button("Analyze My Behavioral Profile", use_container_width=True)
 if submit:
-st.header("2. Your Estimated Behavioral Profile")
+    profile = get_profile(studytime, goout, freetime, dalc, walc, absences, failures)
 
-st.markdown(f"""
-<div class="profile-card">
-<h2>{profile["name"]}</h2>
-<p><span class="highlight">{profile["summary"]}</span></p>
-<p>{profile["description"]}</p>
-</div>
-""", unsafe_allow_html=True)
+    st.divider()
+    st.header("2. Your Estimated Behavioral Profile")
 
-col1, col2 = st.columns(2)
+    st.markdown(f"""
+    <div class="profile-card">
+    <h2>{profile["name"]}</h2>
+    <p><span class="highlight">{profile["summary"]}</span></p>
+    <p>{profile["description"]}</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-with col1:
-    st.subheader("Potential Strengths")
-    for item in profile["strengths"]:
-        st.write(f"- {item}")
+    col1, col2 = st.columns(2)
 
-with col2:
-    st.subheader("Possible Risk Factors")
-    for item in profile["risks"]:
-        st.write(f"- {item}")
+    with col1:
+        st.subheader("Potential Strengths")
+        for item in profile["strengths"]:
+            st.write(f"- {item}")
 
-st.divider()
+    with col2:
+        st.subheader("Possible Risk Factors")
+        for item in profile["risks"]:
+            st.write(f"- {item}")
 
-# -----------------------------
-# Dataset support
-# -----------------------------
-st.header("3. Dataset Support")
+    st.divider()
 
-st.markdown("""
-The original clustering analysis found several recurring behavioral patterns across the Math and Portuguese datasets:
+    st.header("3. Dataset Support")
+    st.markdown("""
+    The original clustering analysis found several recurring behavioral patterns across the Math and Portuguese datasets:
 
-- Academically stable clusters generally showed higher study time, fewer failures, lower alcohol consumption, and stronger academic outcomes.
-- Social / lifestyle-oriented clusters showed higher going-out behavior, higher alcohol consumption, and sometimes higher absences.
-- At-risk academic clusters showed lower final grades and higher previous failures.
-- Similar profile structures appeared in both datasets, suggesting that these patterns were not limited to one subject.
-""")
-
+    - Academically stable clusters generally showed higher study time, fewer failures, lower alcohol consumption, and stronger academic outcomes.
+    - Social / lifestyle-oriented clusters showed higher going-out behavior, higher alcohol consumption, and sometimes higher absences.
+    - At-risk academic clusters showed lower final grades and higher previous failures.
+    - Similar profile structures appeared in both datasets, suggesting that these patterns were not limited to one subject.
+    """)
+else:
+    st.info("Adjust the sliders above, then click **Analyze My Behavioral Profile** to see your result.")
 summary_data = {
     "Profile Type": [
         "Academically Stable",
